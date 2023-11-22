@@ -1,0 +1,69 @@
+.search-container {
+    position: absolute;
+    top: 80%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 56%;
+    display: flex;
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center elements horizontally */
+}
+
+.Buttons {
+    background-color: transparent;
+    border-radius: 10vw;
+    border-width: 2vh;
+    display: flex;
+    padding: 1vh;
+  }
+
+
+.catbut {
+    margin: 1vh; /* Set margin for both horizontal and vertical */
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-width: 0.8vh;
+    border-color: #000000;
+    background-color: rgb(201, 201, 201);
+    color: #000000;
+    border-radius: 10vw;
+    cursor: pointer;
+    font-size: 2vh;
+    text-decoration: none;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    caret-color: transparent;
+
+    &:hover {
+        background-color: rgb(154, 154, 154); /* Change the background color on hover */
+    }
+}
+
+    .search-bar {
+        width: 100%;
+        height: 100%;
+        border-radius: 10vw;
+        box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.3);
+        outline: none;
+        padding: 2%;
+    }
+
+    .search-container.fade{
+        opacity: 0;
+        transition: opacity 0.2s ease; /* Adjust the transition duration as needed */
+      }
+
+    .search-container.fade-in{
+    opacity: 100;
+    transition: opacity 0.2s ease; /* Adjust the transition duration as needed */
+    }
+
+    .search-bar-form{
+        width: 60%;
+        height: 30%;
+        border-radius: 10vw;
+        outline: none;
+        
+    }
