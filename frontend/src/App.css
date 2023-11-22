@@ -1,0 +1,71 @@
+
+.tree {
+  height: 140%;
+  pointer-events: none;
+  position: relative;
+  left: 31%;
+  top: 50%;
+  caret-color: transparent;
+  transform: translate(-50%, -50%)
+}
+
+.bird {
+  height: 35vh;
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%)
+}
+
+.dialoguebox img{
+  height: 25vh;
+  pointer-events: none;
+}
+
+.dialoguebox {
+  position: absolute;
+  left: 55%;
+  top: 10%;
+  transition: transform 0.3;
+  animation:
+  hoverAnimation 2s infinite;
+}
+
+@keyframes hoverAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.5vh);
+  }
+}
+
+.dialogue {
+ color: black;
+ font-family: 'Courier New', Courier, monospace;
+ text-align: center;
+ position: relative;
+ top: 50%;
+ transform: translatey(-75%);
+ font-size: 1.5em;
+}
+
+.dialoguecontainer {
+  padding: 0%;
+  margin: 0%;
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  left: 30%;
+  top: 25%;
+  overflow: hidden;
+}
+
+.main-page {
+  background-color: rgb(95, 195, 228);
+  color: white;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
