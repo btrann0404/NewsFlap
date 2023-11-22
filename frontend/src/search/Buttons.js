@@ -3,11 +3,11 @@ import './Buttons.css';
 
 function Categorybut({ category, buttonClicked }){
     if (category){
-    return <button className="catbut" onClick={ buttonClicked }>{ category }</button>;
+        return <button className="catbut" onClick={ buttonClicked }>{ category }</button>;
     }
     else
     {
-    return null
+        return null
     }
 }
 

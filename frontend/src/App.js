@@ -14,6 +14,13 @@ function App() {
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
   const audioRef = useRef(null);
 
+  const handleError = (error) => console.log(error);
+
+  const searchFailed = () => {
+    handleError("Search Failed")
+    setSearchBarVisibility(false);
+  }
+
   const handleCategory = (buttonsData) => {
     search("none", buttonsData);
     setSearchBarVisibility(true);
@@ -49,6 +56,7 @@ function App() {
       setLinkList(response.links)
     } catch (error) {
       console.error("Error during fetch:", error);
+      searchFailed();
     }
  };
  
@@ -71,7 +79,7 @@ function App() {
         </figure>
         <Buttons setCategoryFromButtons={ handleCategory } setSearchFromButtons={ handleSearch } searchBar = { searchBarVisibility }/>
         <Summaries summaryList = { summaryList } linkList = { linkList } clearSummaryList = { clearSummaries }/>
-        <Signin />
+        <Signin setError={ handleError }/>
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ def retrieve(sources, newsapi, page="general", catIdx=0, keyword=None):
 
 def getArticles(keyword = None, category = None):
     # Init
-    newsapi = NewsApiClient(api_key='YOUR OWN API KEY') # <-- ADD YOUR OWN NEWSAPI KEY HERE
+    newsapi = NewsApiClient(api_key='YOUR NEWS API HERE') #<-- PUT IT HEREEEEEEE
     sources = pd.DataFrame(newsapi.get_sources()['sources'])
     sources = ",".join(sources['name'].values).replace(" ","-")
     if category == None:

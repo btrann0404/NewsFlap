@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Signin.css';
 import FormInput from './FormInput';
 
-function Signin() {
+function Signin(props) {
     const [loginPageVisible, toggleLoginPage] = useState(false);
     const [registerPageVisible, toggleRegisterPage] = useState(false);
 
@@ -77,8 +77,13 @@ function Signin() {
           required: true
         }
       ];
-    
+      
+      const handleError= async (error) => {
+        props.setError(error);
+      } 
+
       const handleLoginSubmit = async (logininfo) => {
+        try {
             // Perform a POST request to your backend API using the fetch API
             console.log(logininfo)
             const result = await fetch("http://localhost:5000/login", {
@@ -88,11 +93,23 @@ function Signin() {
               },
               body: JSON.stringify(logininfo),
           })
-          const success = await result.json();
-          console.log(success);
-        };
+
+          const loginresults = await result.json();
+          
+          if (loginresults !== "Login successful!") {
+            throw new Error(loginresults);
+          }
+          else {
+            closeForms()
+          }
+        
+        } catch (error) {
+          handleError(error);
+        }
+      };
 
       const handleRegisterSubmit = async (registerinfo) => {
+        try {
             // Perform a POST request to your backend API using the fetch API
             const result = await fetch("http://localhost:5000/register", {
               method: "POST",
@@ -102,8 +119,19 @@ function Signin() {
               body: JSON.stringify(registerinfo),
           })
           const accountresults = await result.json();
-          console.log(accountresults);
-        };
+          
+          if (accountresults !== "Registration Successful!") {
+            throw new Error(accountresults);
+          }
+          else {
+              closeForms()
+          }
+          
+        } catch (error) {
+          handleError(error);
+        }
+      };
+
     
       const onRegChange = (e) => {
         setRegisterValues({ ...registervalues, [e.target.name]: e.target.value });

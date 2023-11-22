@@ -111,12 +111,7 @@ def register():
                 user_id = cursor.fetchone()[0]
                 message = "Registration Successful!"
 
-        response_data = {
-            "message": message,
-            "regusername": regusername
-        }
-
-        return jsonify(response_data), 200
+        return jsonify(message), 200
     
 @app.route('/login', methods=["POST"])
 def login():
@@ -143,12 +138,9 @@ def login():
                 if passwordcorrect == False:
                     return jsonify("Password Incorrect")
 
-                response_data = {
-                    "message": "Login successful",
-                    "logemail": loginemail
-                }
+                message = "Login successful!"
 
-        return jsonify(response_data)  
+        return jsonify(message)  
 
 # Running app
 if __name__ == '__main__':
