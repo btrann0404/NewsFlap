@@ -7,14 +7,22 @@ import './App.css';
 import Buttons from './search/Buttons.js';
 import Summaries from './summary/Summaries.js';
 import Signin from './login-register/Signin.js';
+import Signout from './login-register/Signout.js';
 
 function App() {
   const [summaryList, setSummaryList] = useState("");
   const [linkList, setLinkList] = useState("");
   const [searchBarVisibility, setSearchBarVisibility] = useState(false);
+  const [user_ID, setUserID] = useState("");
   const audioRef = useRef(null);
 
   const handleError = (error) => console.log(error);
+
+  const handleLogin = (user_id) => {
+    setUserID(user_id, () => {
+      console.log("UserID: " + user_ID); // This might still log the previous state
+    });
+  };
 
   const searchFailed = () => {
     handleError("Search Failed")
@@ -22,12 +30,12 @@ function App() {
   }
 
   const handleCategory = (buttonsData) => {
-    search("none", buttonsData);
+    search("none", buttonsData, user_ID);
     setSearchBarVisibility(true);
   };
 
   const handleSearch = (searchbarData) => {
-    search(searchbarData, "none");
+    search(searchbarData, "none", user_ID);
     setSearchBarVisibility(true);
   }
 
@@ -36,14 +44,14 @@ function App() {
     setSearchBarVisibility(false);
   };
 
-  const search = async (keyword, category) => {
+  const search = async (keyword, category, user_id) => {
     try {
       const result = await fetch("http://localhost:5000/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ keyword, category }),
+        body: JSON.stringify({ keyword, category, user_id }),
       });
  
       if (!result.ok) {
@@ -79,7 +87,8 @@ function App() {
         </figure>
         <Buttons setCategoryFromButtons={ handleCategory } setSearchFromButtons={ handleSearch } searchBar = { searchBarVisibility }/>
         <Summaries summaryList = { summaryList } linkList = { linkList } clearSummaryList = { clearSummaries }/>
-        <Signin setError={ handleError }/>
+        {user_ID === "" && <Signin setError={ handleError } setUserID={ handleLogin }/>}
+        {user_ID !== "" && <Signout />}
       </div>
     </div>
   );

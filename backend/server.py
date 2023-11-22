@@ -21,7 +21,7 @@ INSERT_USERS = (
 )
 
 INSERT_INFO = (
-    "INSERT INTO users (user_id, search_history) VALUES (%s, %s);"
+    "INSERT INTO information (user_id, search_history) VALUES (%s, %s);"
 )
 
 #this one just for fun
@@ -48,23 +48,48 @@ def search():
         data = request.get_json()
         category = data.get('category')
         keyword = data.get('keyword')
+        user_id = data.get('user_id')
 
         if category == "none":
             category = None
         
         if keyword == "none":
             keyword= None
-        
+
         print(keyword)
         print(category)
 
-        articles, links = getArticles(keyword, category)
-        print("got here3")
+        uncleanedarticles, uncleanedlinks = getArticles(keyword, category)
+
+        if user_id != "":
+            # Add to database
+            with connection:
+                with connection.cursor() as cursor:
+                    # Create or skip creating da SQL table
+                    cursor.execute(CREATE_INFO_TABLE)
+                    
+                    #insert into search history
+                    if category == None:
+                        category = ""
+                    if keyword == None:
+                        keyword = ""
+                    word = category + keyword
+
+                    cursor.execute(INSERT_INFO, (user_id, word))
+
+        #Get rid of bad articles or youtube links
+        articles = []
+        links = []
+        for i in range(len(uncleanedarticles)):
+            if not("Request Error" in uncleanedarticles[i] or "youtube" in uncleanedlinks[i]):
+                articles.append(uncleanedarticles[i])
+                links.append(uncleanedlinks[i])
+
         summaries = [summarize(article) for article in articles]
 
         response_data = {
             'summaries': summaries,
-            'links': links.tolist()
+            'links': links
         }
 
         print(response_data)
@@ -137,10 +162,19 @@ def login():
                 passwordcorrect = sha256_crypt.verify(loginpassword, stored_password)
                 if passwordcorrect == False:
                     return jsonify("Password Incorrect")
-
+                query = f"SELECT id FROM users WHERE email = '{loginemail}';"
+                cursor.execute(query)
+                user_id = cursor.fetchone()[0]
                 message = "Login successful!"
 
-        return jsonify(message)  
+        response = {
+            "user_ID": str(user_id),
+            "message": message
+        }
+
+        print(response)
+
+        return jsonify(response)  
 
 # Running app
 if __name__ == '__main__':

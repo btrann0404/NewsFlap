@@ -82,6 +82,11 @@ function Signin(props) {
         props.setError(error);
       } 
 
+      const handleUserID= async (user_id) => {
+        props.setUserID(user_id);
+        console.log("inside signin the userID is: " + user_id)
+      } 
+
       const handleLoginSubmit = async (logininfo) => {
         try {
             // Perform a POST request to your backend API using the fetch API
@@ -95,12 +100,12 @@ function Signin(props) {
           })
 
           const loginresults = await result.json();
-          
-          if (loginresults !== "Login successful!") {
-            throw new Error(loginresults);
+          if (loginresults.message !== "Login successful!") {
+            throw new Error(loginresults.message);
           }
           else {
-            closeForms()
+            handleUserID(loginresults.user_ID);
+            closeForms();
           }
         
         } catch (error) {
@@ -124,7 +129,7 @@ function Signin(props) {
             throw new Error(accountresults);
           }
           else {
-              closeForms()
+              closeForms();
           }
           
         } catch (error) {

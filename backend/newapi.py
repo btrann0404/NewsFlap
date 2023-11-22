@@ -31,7 +31,7 @@ def retrieve(sources, newsapi, page="general", catIdx=0, keyword=None):
 
 def getArticles(keyword = None, category = None):
     # Init
-    newsapi = NewsApiClient(api_key='YOUR NEWS API HERE') #<-- PUT IT HEREEEEEEE
+    newsapi = NewsApiClient(api_key='') #<-- ADD YOUR KEY HERE
     sources = pd.DataFrame(newsapi.get_sources()['sources'])
     sources = ",".join(sources['name'].values).replace(" ","-")
     if category == None:
@@ -79,4 +79,4 @@ def getArticles(keyword = None, category = None):
         content.append(article_text.replace("'",""))
     end_time = time.time()
     elapsed_time = end_time-start_time
-    return content, df['url'].values
+    return content, list(df['url'].values)
