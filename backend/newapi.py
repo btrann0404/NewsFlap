@@ -4,6 +4,10 @@ import bs4 as bs
 import urllib.request
 import time
 import requests
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 CATEGORY = [None,'business','entertainement','health','general','technology','science','sports']
 
@@ -31,7 +35,7 @@ def retrieve(sources, newsapi, page="general", catIdx=0, keyword=None):
 
 def getArticles(keyword = None, category = None):
     # Init
-    newsapi = NewsApiClient(api_key='') 
+    newsapi = NewsApiClient(api_key=os.getenv("NEWS_API_KEY")) 
     sources = pd.DataFrame(newsapi.get_sources()['sources'])
     sources = ",".join(sources['name'].values).replace(" ","-")
     if category == None:

@@ -32,6 +32,7 @@ load_dotenv()
 
 app = Flask(__name__)
 url = os.getenv("NEWSFLAP_DATABASE_URL")
+print(url)
 connection = psycopg2.connect(url)
 
 CORS(app, origins=["http://localhost:3000"])
@@ -60,6 +61,8 @@ def search():
         print(category)
 
         uncleanedarticles, uncleanedlinks = getArticles(keyword, category)
+
+        print(uncleanedarticles, uncleanedlinks)
 
         if user_id != "":
             # Add to database
