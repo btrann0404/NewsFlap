@@ -9,23 +9,30 @@
 }
 
 .login {
-    background-color: black;
+    background-color: #222;
     font-family: 'Courier New', Courier, monospace;
     color: white;
     border-radius: 5vw;
-    margin: 0.5vw;
-    height: 50px;
+    margin: 0.3vw;
+    height: 35px;
     font-size: medium;
+    transition: transform 0.2s ease;
+}
+
+.login:hover, .register:hover {
+  background-color: #333;
+  transition: transform 0.2s ease;
 }
 
 .register {
-    background-color: black;
+    background-color: #222;
     font-family: 'Courier New', Courier, monospace;
     color: white;
     border-radius: 5vw;
-    margin: 0.5vw;;
-    height: 50px;
+    margin: 0.3vw;;
+    height: 35px;
     font-size: medium;
+    transition: transform 0.2s ease;
 }
 
 .login-form,

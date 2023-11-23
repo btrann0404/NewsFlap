@@ -1,0 +1,58 @@
+.container {
+    height: 100%;
+    width: 250px;
+    position: absolute;
+    background-color: #222;
+    padding-top: 20px;
+    color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    left: 0%;
+    top: 0%;
+}
+
+.title {
+    text-align: left;
+    margin: 0;
+    padding: 10px;
+    color: #666;
+}
+
+.searchhistoryitem {
+    width: 98%; 
+    box-sizing: border-box; 
+    padding: 10px;
+    margin-bottom: 2px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    text-align: left;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.searchhistoryitem:hover {
+    background-color: #333;
+    transform: scale(1.01);
+    transition: transform 0.2s ease;
+}
+
+.caret-btn {
+    position: absolute;
+    right: 0;
+    top: 98%;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    outline: none;
+    transition: transform 0.2s ease;
+    border-radius: 3px;
+}
+
+.caret-btn:hover {
+    background-color: #666;
+    transform: scale(1.01);
+    transition: transform 0.2s ease;
+}

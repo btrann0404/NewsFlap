@@ -78,6 +78,10 @@ function Signin(props) {
         }
       ];
       
+      const handleNotification= async (message) => {
+        props.setNotification(message);
+      }
+
       const handleError= async (error) => {
         props.setError(error);
       } 
@@ -130,9 +134,11 @@ function Signin(props) {
           }
           else {
               closeForms();
+              handleNotification(accountresults);
           }
           
         } catch (error) {
+          console.log(error);
           handleError(error);
         }
       };

@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Signout.css';
 
-function Signout() {
+function Signout(props) {
+    
+    const Logout = async () => {
+        props.setLogout();
+    }
 
     return (
-        <div>
-            <button>Sign Out</button>
+        <div className="signoutcontainer">
+            <button onClick={ Logout }className="signout">Log Out</button>
         </div>
     );
 }

@@ -8,6 +8,9 @@ import Buttons from './search/Buttons.js';
 import Summaries from './summary/Summaries.js';
 import Signin from './login-register/Signin.js';
 import Signout from './login-register/Signout.js';
+import SearchHistory from './searchhistorysidebar/searchhistorybar.js'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [summaryList, setSummaryList] = useState("");
@@ -16,12 +19,22 @@ function App() {
   const [user_ID, setUserID] = useState("");
   const audioRef = useRef(null);
 
-  const handleError = (error) => console.log(error);
+  const handleError = (error) => {
+    toast.error(String(error));
+  }
+
+  const handleNotification = (message) => toast(message);
 
   const handleLogin = (user_id) => {
     setUserID(user_id, () => {
       console.log("UserID: " + user_ID); // This might still log the previous state
     });
+    toast("Logged In")
+  };
+
+  const handleLogout = () => {
+    setUserID("")
+    toast("Logged Out")
   };
 
   const searchFailed = () => {
@@ -87,8 +100,10 @@ function App() {
         </figure>
         <Buttons setCategoryFromButtons={ handleCategory } setSearchFromButtons={ handleSearch } searchBar = { searchBarVisibility }/>
         <Summaries summaryList = { summaryList } linkList = { linkList } clearSummaryList = { clearSummaries }/>
-        {user_ID === "" && <Signin setError={ handleError } setUserID={ handleLogin }/>}
-        {user_ID !== "" && <Signout />}
+        {user_ID === "" && <Signin setError={ handleError } setUserID={ handleLogin } setNotification={ handleNotification }/>}
+        {user_ID !== "" && <Signout setLogout={ handleLogout } />}
+        {user_ID !== "" && <SearchHistory />}
+        <ToastContainer />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ USER_COUNT = ("""SELECT COUNT (DISTINCT username) AS user_count;""")
 load_dotenv()
 
 app = Flask(__name__)
-url = os.getenv("DATABASE_URL")
+url = os.getenv("NEWSFLAP_DATABASE_URL")
 connection = psycopg2.connect(url)
 
 CORS(app, origins=["http://localhost:3000"])

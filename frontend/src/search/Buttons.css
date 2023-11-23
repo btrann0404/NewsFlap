@@ -20,24 +20,28 @@
 
 .catbut {
     margin: 1vh; /* Set margin for both horizontal and vertical */
-    padding-left: 2vh;
-    padding-right: 2vh;
-    border-width: 0.8vh;
-    border-color: #000000;
-    background-color: rgb(201, 201, 201);
-    color: #000000;
-    border-radius: 10vw;
+    padding-left: 30px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border: none;
+    padding-right: 30px;
+    background-color: #222;
+    color: white;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 2vh;
     text-decoration: none;
     height: 30%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     caret-color: transparent;
+    transition: transform 0.3s ease;
+    font-family: 'Courier New', Courier, monospace;
 
     &:hover {
-        background-color: rgb(154, 154, 154); /* Change the background color on hover */
+        background-color: #333;
+        transform: scale(1.01);
+        transition: transform 0.2s ease;
     }
 }
 
@@ -65,5 +69,5 @@
         height: 30%;
         border-radius: 10vw;
         outline: none;
-        
+        font-size: large;
     }
